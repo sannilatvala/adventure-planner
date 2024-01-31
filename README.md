@@ -10,3 +10,5 @@ Key features:
 - The user can give an adventure stars as a review.
 - The user can see how many stars an adventure has.
 - The user can see the most liked adventures on the main page.
+- The user can add an adventure to favorites.
+- The admin can add and delete adventures.

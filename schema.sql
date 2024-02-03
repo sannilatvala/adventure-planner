@@ -4,3 +4,15 @@ CREATE TABLE users (
     password TEXT,
     role INTEGER
 );
+
+CREATE TABLE adventures (
+    id SERIAL PRIMARY KEY,
+    title TEXT,
+    description TEXT,
+    duration TEXT,
+    cost INTEGER,
+    difficulty_level TEXT,
+    environment TEXT,
+    group_size TEXT,
+    season TEXT
+);

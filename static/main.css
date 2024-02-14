@@ -5,3 +5,25 @@ label {
     margin-right: 10px;
     margin-top: 2px;
 }
+
+label.stars {
+    display: inline-block;
+    width: 50px;
+    text-align: left;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+label.comment {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+textarea.comment {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 2px;
+    width: 200px;
+    height: 15px;
+}

@@ -1,0 +1,28 @@
+<form action="/review" method="post">
+    <label for="stars" class="stars">Stars:</label>
+    <select name="stars">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        </select>
+        <label for="comment" class="comment">Comment:</label>
+        <textarea id="comment" name="comment" class="comment" rows="2" cols="30" required></textarea>
+
+    <input type="hidden" id="adventure_id" name="adventure_id" value="{{ adventure["id"] }}">
+    <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
+        
+    <input type="submit" value="Submit review">
+</form>
+
+{% if adventure["reviews"] %}
+    <h4>Reviews:</h4>
+    <ul>
+        {% for review in adventure["reviews"] %}
+            <li>User: {{ review["username"] }} - Stars: {{ review["stars"] }}, Comment: {{ review["comment"] }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviews for this adventure yet.</p>
+{% endif %}

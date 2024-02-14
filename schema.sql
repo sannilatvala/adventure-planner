@@ -16,3 +16,11 @@ CREATE TABLE adventures (
     group_size TEXT,
     season TEXT
 );
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    adventure_id INTEGER REFERENCES adventures,
+    stars INTEGER,
+    comment TEXT
+);

@@ -1,7 +1,7 @@
 import secrets
 from flask import render_template, request, redirect, session, abort
 from app import app
-from services import users, adventures
+from services import users, adventures, reviews
 import initialize_database
 
 @app.route("/")
@@ -67,4 +67,22 @@ def home():
 
         created_adventures = adventures.create_adventures(user_preferences)
 
-        return render_template("home.html", adventures=created_adventures)
+        adventures_with_reviews = []
+        for adventure in created_adventures:
+            adventure["reviews"] = reviews.get_reviews(adventure["id"])
+            adventures_with_reviews.append(adventure)
+
+        return render_template(
+            "home.html", preferences_submitted=True, adventures=adventures_with_reviews)
+
+@app.route("/review", methods=["post"])
+def add_review():
+    if request.method == "POST":
+        user_id = users.user_id()
+        adventure_id = request.form["adventure_id"]
+        stars = request.form["stars"]
+        comment = request.form["comment"]
+
+    reviews.add_review(user_id, adventure_id, stars, comment)
+
+    return render_template("home.html")

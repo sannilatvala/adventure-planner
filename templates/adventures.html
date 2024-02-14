@@ -1,0 +1,13 @@
+{% block content %}
+
+{% if adventures %}
+    <h2>Recommended Adventures</h2>
+    {% for adventure in adventures %}
+        <h3>{{ adventure["title"] }}</h3>
+        <p>{{ adventure["description"] }}</p>
+        {% include "reviews.html" %}
+    {% endfor %}
+{% else %}
+    <p>No adventures found. Check back later for more recommendations!</p>
+{% endif %}
+{% endblock %}

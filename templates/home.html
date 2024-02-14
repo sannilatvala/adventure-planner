@@ -13,7 +13,7 @@
     <label for="budget">Budget:</label>
     <input type="number" id="budget" name="budget" required> euro<br>
 
-    <label for="difficulty">Difficulty Level:</label>
+    <label for="difficulty">Difficulty level:</label>
     <select id="difficulty" name="difficulty" required>
         <option value="Easy">Easy</option>
         <option value="Medium">Medium</option>
@@ -26,7 +26,7 @@
         <option value="Outside">Outside</option>
     </select><br>
 
-    <label for="group_size">Group Size:</label>
+    <label for="group_size">Group size:</label>
     <select id="group_size" name="group_size" required>
         <option value="Solo">Solo</option>
         <option value="Group">Group</option>
@@ -41,13 +41,8 @@
     <input type="submit" value="Submit">
 </form>
 
-{% if adventures %}
-    <h2>Recommended Adventures</h2>
-    {% for adventure in adventures %}
-        <h3>{{ adventure["title"] }}</h3>
-        <p>{{ adventure["description"] }}</p>
-    {% endfor %}
-{% else %}
-    <p>No adventures found. Check back later for more recommendations!</p>
+{% if preferences_submitted %}
+    {% include "adventures.html" %}
 {% endif %}
+
 {% endblock %}

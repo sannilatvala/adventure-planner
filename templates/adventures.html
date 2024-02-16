@@ -6,6 +6,10 @@
         <h3>{{ adventure["title"] }}</h3>
         <p>{{ adventure["description"] }}</p>
         {% include "reviews.html" %}
+        <form action="/add_to_favorites" method="post">
+            <input type="hidden" name="adventure_id" value="{{ adventure["id"] }}">
+            <input type="submit" value="Add to favorites">
+        </form>
     {% endfor %}
 {% else %}
     <p>No adventures found. Check back later for more recommendations!</p>

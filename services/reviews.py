@@ -18,5 +18,4 @@ def get_reviews(adventure_id):
         ORDER BY reviews.id
         """)
     result = db.session.execute(sql, {"adventure_id": adventure_id}).fetchall()
-    db.session.commit()
     return result

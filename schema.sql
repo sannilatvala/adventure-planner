@@ -24,3 +24,9 @@ CREATE TABLE reviews (
     stars INTEGER,
     comment TEXT
 );
+
+CREATE TABLE favorites (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    adventure_id INTEGER REFERENCES adventures
+);

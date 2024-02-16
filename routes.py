@@ -1,7 +1,7 @@
 import secrets
 from flask import render_template, request, redirect, session, abort
 from app import app
-from services import users, adventures, reviews
+from services import users, adventures, reviews, favorites
 import initialize_database
 
 @app.route("/")
@@ -86,3 +86,37 @@ def add_review():
     reviews.add_review(user_id, adventure_id, stars, comment)
 
     return render_template("home.html")
+
+@app.route("/get_favorites", methods=["get"])
+def get_favorites():
+    if request.method == "GET":
+        user_id = users.user_id()
+        favorite_adventures = favorites.get_favorites(user_id)
+
+        adventures_with_reviews = []
+        for adventure in favorite_adventures:
+            adventure["reviews"] = reviews.get_reviews(adventure["id"])
+            adventures_with_reviews.append(adventure)
+
+        return render_template("favorites.html", favorite_adventures = adventures_with_reviews)
+
+@app.route("/add_to_favorites", methods=["post"])
+def add_to_favorites():
+    if request.method == "POST":
+        user_id = users.user_id()
+        adventure_id = request.form["adventure_id"]
+
+    favorites.add_to_favorites(user_id, adventure_id)
+
+    return render_template("home.html")
+
+@app.route("/delete_from_favorites", methods=["post"])
+def delete_from_favorites():
+    if request.method == "POST":
+        user_id = users.user_id()
+        adventure_id = request.form["adventure_id"]
+
+    favorites.delete_from_favorites(user_id, adventure_id)
+    favorite_adventures = favorites.get_favorites(user_id)
+
+    return render_template("favorites.html", favorite_adventures = favorite_adventures)

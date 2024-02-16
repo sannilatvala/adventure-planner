@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3>My favorite adventures</h3>
+{% if favorite_adventures %}
+    {% for adventure in favorite_adventures %}
+        <h3>{{ adventure["title"] }}</h3>
+        <p>{{ adventure["description"] }}</p>
+        {% include "reviews.html" %}
+        <form action="/delete_from_favorites" method="post">
+            <input type="hidden" name="adventure_id" value="{{ adventure["id"] }}">
+            <input type="submit" value="Delete from favorites">
+        </form>
+    {% endfor %}
+{% else %}
+    <p>No favorite adventures found.</p>
+{% endif %}
+<br>
+<a href="/home">Home</a><br>
+
+{% endblock %}

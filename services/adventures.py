@@ -2,7 +2,15 @@ from sqlalchemy.sql import text
 from db import db
 import random
 
-def create_adventures(user_preferences):
+def create_adventures(user_id):
+    sql = text("SELECT * FROM preferences WHERE user_id = :user_id")
+    result = db.session.execute(sql, {"user_id": user_id})
+    columns = result.keys()
+
+    user_preferences = result.fetchone()
+
+    user_preferences_dict = dict(zip(columns, user_preferences))
+
     sql = text("SELECT * FROM adventures")
     result = db.session.execute(sql)
 
@@ -12,12 +20,12 @@ def create_adventures(user_preferences):
 
     adventures_list = [dict(zip(columns, adventure)) for adventure in adventures]
 
-    duration_preference = user_preferences["duration"]
-    budget_preference = user_preferences["budget"]
-    difficulty_preference = user_preferences["difficulty"]
-    environment_preference = user_preferences["environment"]
-    group_size_preference = user_preferences["group_size"]
-    season_preference = user_preferences["season"]
+    duration_preference = user_preferences_dict["duration_preference"]
+    budget_preference = user_preferences_dict["budget_preference"]
+    difficulty_preference = user_preferences_dict["difficulty_preference"]
+    environment_preference = user_preferences_dict["environment_preference"]
+    group_size_preference = user_preferences_dict["group_size_preference"]
+    season_preference = user_preferences_dict["season_preference"]
 
     recommended_adventures = []
 

@@ -1,7 +1,7 @@
 import secrets
 from flask import render_template, request, redirect, session, abort
 from app import app
-from services import users, adventures, reviews, favorites
+from services import users, adventures, reviews, favorites, preferences
 import initialize_database
 
 @app.route("/")
@@ -55,6 +55,7 @@ def home():
         return render_template("home.html")
 
     if request.method == "POST":
+        user_id = users.user_id()
 
         user_preferences = {
             "duration": request.form["duration"],
@@ -65,7 +66,9 @@ def home():
             "season": request.form["season"]
         }
 
-        created_adventures = adventures.create_adventures(user_preferences)
+        preferences.create_preferences(user_id, user_preferences)
+
+        created_adventures = adventures.create_adventures(user_id)
 
         adventures_with_reviews = []
         for adventure in created_adventures:

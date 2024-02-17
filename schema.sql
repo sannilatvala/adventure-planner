@@ -17,6 +17,17 @@ CREATE TABLE adventures (
     season TEXT
 );
 
+CREATE TABLE preferences (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    duration_preference TEXT,
+    budget_preference INTEGER,
+    difficulty_preference TEXT,
+    environment_preference TEXT,
+    group_size_preference TEXT,
+    season_preference TEXT
+);
+
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,

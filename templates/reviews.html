@@ -13,6 +13,8 @@
     <input type="hidden" id="adventure_id" name="adventure_id" value="{{ adventure["id"] }}">
         
     <input type="submit" value="Submit review">
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 {% if adventure["reviews"] %}

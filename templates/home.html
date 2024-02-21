@@ -39,6 +39,8 @@
     </select><br>
 
     <input type="submit" value="Submit">
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
 {% if preferences_submitted %}

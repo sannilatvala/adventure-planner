@@ -10,6 +10,8 @@
         <form action="/delete_from_favorites" method="post">
             <input type="hidden" name="adventure_id" value="{{ adventure["id"] }}">
             <input type="submit" value="Delete from favorites">
+
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     {% endfor %}
 {% else %}

@@ -55,6 +55,7 @@ def home():
         return render_template("home.html")
 
     if request.method == "POST":
+        users.check_csrf()
         user_id = users.user_id()
 
         user_preferences = {
@@ -81,6 +82,7 @@ def home():
 @app.route("/review", methods=["post"])
 def add_review():
     if request.method == "POST":
+        users.check_csrf()
         user_id = users.user_id()
         adventure_id = request.form["adventure_id"]
         stars = request.form["stars"]
@@ -106,6 +108,7 @@ def get_favorites():
 @app.route("/add_to_favorites", methods=["post"])
 def add_to_favorites():
     if request.method == "POST":
+        users.check_csrf()
         user_id = users.user_id()
         adventure_id = request.form["adventure_id"]
 
@@ -116,6 +119,7 @@ def add_to_favorites():
 @app.route("/delete_from_favorites", methods=["post"])
 def delete_from_favorites():
     if request.method == "POST":
+        users.check_csrf()
         user_id = users.user_id()
         adventure_id = request.form["adventure_id"]
 

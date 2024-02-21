@@ -1,5 +1,6 @@
 import os
 import secrets
+import re
 from sqlalchemy.sql import text
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import session, abort, request
@@ -24,21 +25,39 @@ def login(username, password):
     return True
 
 def register(username, password):
-    sql = text("SELECT password, id FROM users WHERE username=:username")
-    user = db.session.execute(sql, {"username": username}).fetchone()
-
-    if user:
-        return False
-
     hash_value = generate_password_hash(password)
-    sql = text(
-        "INSERT INTO users (username, password) VALUES (:username, :password)")
-    db.session.execute(sql, {"username":username, "password":hash_value})
-    db.session.commit()
+    try:
+        sql = text(
+            "INSERT INTO users (username, password) VALUES (:username, :password)")
+        db.session.execute(sql, {"username":username, "password":hash_value})
+        db.session.commit()
+    except:
+        return False
 
     login_successful = login(username, password)
 
     return login_successful
+
+def validate_registration(username, password1, password2):
+    if not username or not password1:
+        return "Username and password required"
+    if len(username) < 3:
+        return "Username must be at least 3 characters long"
+    if len(password1) < 5:
+        return "Password must be at least 5 characters long"
+    if not re.match("^[a-z0-9]+$", username):
+        return "Username can only contain lowercase letters and numbers"
+    if not re.search(r"[a-zA-Z]", password1) or not re.search(r"\d", password1):
+        return "Password must include both letters and numbers"
+    if password1 != password2:
+        return "Passwords do not match"
+
+    sql = text("SELECT password, id FROM users WHERE username=:username")
+    user = db.session.execute(sql, {"username": username}).fetchone()
+
+    if user:
+        return "Username already exists"
+    return None
 
 def logout():
     del session["user_id"]

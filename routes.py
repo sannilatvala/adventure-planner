@@ -1,5 +1,5 @@
 import secrets
-from flask import render_template, request, redirect, session, abort
+from flask import render_template, request, redirect
 from app import app
 from services import users, adventures, reviews, favorites, preferences
 import initialize_database
@@ -34,8 +34,10 @@ def register():
         password1 = request.form["password1"]
         password2 = request.form["password2"]
 
-        if password1 != password2:
-            return render_template("error.html", message="Passwords differ")
+        error_message = users.validate_registration(username, password1, password2)
+
+        if error_message:
+            return render_template("error.html", message=error_message)
 
         registration_successful = users.register(username, password1)
 

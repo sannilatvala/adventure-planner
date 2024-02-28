@@ -261,7 +261,7 @@
         "difficulty_level": "Easy",
         "environment": ["Outside"],
         "group_size": ["Solo", "Group"],
-        "season": ["Summer", "Winter"]
+        "season": ["Summer"]
     },
     {
         "id": 25,
@@ -387,11 +387,11 @@
     {
         "id": 40,
         "title": "Mini Golf",
-        "description": "Play a round of mini golf with friends or family for a lighthearted and entertaining outdoor activity.",
+        "description": "Play a round of mini golf with friends or family for a lighthearted and entertaining activity.",
         "duration": "Short",
         "cost": 15,
         "difficulty_level": "Easy",
-        "environment": ["Outside"],
+        "environment": ["Inside", "Outside"],
         "group_size": ["Group"],
         "season": ["Summer", "Winter"]
     },
@@ -521,7 +521,7 @@
         "title": "Dining Out at a Restaurant",
         "description": "Enjoy a meal out at a local restaurant. Treat yourself to your favorite cuisine or explore something new.",
         "duration": "Short",
-        "cost": "20",
+        "cost": 20,
         "difficulty_level": "Easy",
         "environment": ["Inside"],
         "group_size": ["Solo", "Group"],

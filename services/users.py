@@ -60,8 +60,7 @@ def validate_registration(username, password1, password2):
     return None
 
 def logout():
-    del session["user_id"]
-    del session["user_name"]
+    session.clear()
 
 def user_id():
     return session.get("user_id")

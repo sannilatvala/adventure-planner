@@ -11,7 +11,7 @@
     </select><br>
 
     <label for="budget">Budget:</label>
-    <input type="number" id="budget" name="budget" required> euro<br>
+    <input type="number" id="budget" name="budget" required max="1000"> euro<br>
 
     <label for="difficulty">Difficulty level:</label>
     <select id="difficulty" name="difficulty" required>
@@ -44,10 +44,18 @@
 </form>
 
 {% if preferences_submitted %}
-    {% include "adventures.html" %}
+    <button id="showAdventures" style="display: none;">Show Adventures</button>
+    <button id="hideAdventures" style="display: inline;">Hide Adventures</button>
+
+    <div id="adventuresContainer">
+        {% include "adventures.html" %}
+    </div>
 {% endif %}
+<br>
 
 <a href="/get_favorites">Favorites</a><br>
 <a href="/logout">Log out</a>
+
+<script src="./static/scripts/toggleAdventures.js"></script>
 
 {% endblock %}

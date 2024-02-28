@@ -3,6 +3,10 @@
 
 <h2>Register</h2>
 
+{% for message in get_flashed_messages() %}
+<div id="flash-message" class="flash-message">{{ message }}</div>
+{% endfor %}
+
 <form action="/register" method="post">
     Username:<br>
     <input type="text" name="username"></p>
@@ -14,5 +18,7 @@
 </form>
 
 <a href="/login">Login</a>
+
+<script src="./static/scripts/hideFlashMessage.js"></script>
 
 {% endblock %}

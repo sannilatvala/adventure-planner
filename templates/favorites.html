@@ -2,14 +2,19 @@
 {% block content %}
 
 <h3>My favorite adventures</h3>
+
+{% for message in get_flashed_messages() %}
+<div id="flash-message" class="flash-message">{{ message }}</div>
+{% endfor %}
+
 {% if favorite_adventures %}
     {% for adventure in favorite_adventures %}
         <h3>{{ adventure["title"] }}</h3>
         <p>{{ adventure["description"] }}</p>
         {% include "reviews.html" %}
-        <form action="/delete_from_favorites" method="post">
+        <form action="/delete_from_favorites" method="post" onsubmit="return confirmation()">
             <input type="hidden" name="adventure_id" value="{{ adventure["id"] }}">
-            <input type="submit" value="Delete from favorites">
+            <button type="submit">Delete from favorites</button>
 
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
@@ -19,5 +24,8 @@
 {% endif %}
 <br>
 <a href="/home">Home</a><br>
+
+<script src="./static/scripts/confirmationMessage.js"></script>
+<script src="./static/scripts/hideFlashMessage.js"></script>
 
 {% endblock %}

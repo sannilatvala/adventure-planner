@@ -2,6 +2,11 @@
 
 {% if adventures %}
     <h2>Recommended Adventures</h2>
+
+    {% for message in get_flashed_messages() %}
+        <div id="flash-message" class="flash-message">{{ message }}</div>
+    {% endfor %}
+
     {% for adventure in adventures %}
         <h3>{{ adventure["title"] }}</h3>
         <p>{{ adventure["description"] }}</p>
@@ -16,4 +21,7 @@
 {% else %}
     <p>No adventures found. Check back later for more recommendations!</p>
 {% endif %}
+
+<script src="./static/scripts/hideFlashMessage.js"></script>
+
 {% endblock %}

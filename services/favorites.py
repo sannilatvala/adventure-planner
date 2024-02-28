@@ -24,6 +24,8 @@ def add_to_favorites(user_id, adventure_id):
         db.session.execute(sql, {
             "user_id":user_id, "adventure_id":adventure_id})
         db.session.commit()
+        return True
+    return False
 
 def delete_from_favorites(user_id, adventure_id):
     sql = text(

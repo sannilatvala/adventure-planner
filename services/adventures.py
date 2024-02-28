@@ -1,6 +1,8 @@
+import random
 from sqlalchemy.sql import text
 from db import db
-import random
+from flask import session
+import json
 
 def create_adventures(user_id):
     sql = text("SELECT * FROM preferences WHERE user_id = :user_id")
@@ -44,6 +46,12 @@ def create_adventures(user_id):
 
     random_recommended_adventures = recommended_adventures[:min(5, len(recommended_adventures))]
 
+    serialized_adventures = json.dumps(random_recommended_adventures)
+
+    session["created_adventures"] = serialized_adventures
+
+    print(serialized_adventures)
+
     return random_recommended_adventures
 
 def add_adventure(adventure):
@@ -68,3 +76,6 @@ def add_adventure(adventure):
         "cost": cost, "difficulty_level": difficulty_level, 
         "environment": environment, "group_size": group_size, "season": season})
     db.session.commit()
+
+def get_created_adventures():
+    return session.get("created_adventures")

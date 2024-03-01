@@ -1,8 +1,8 @@
 import random
+import json
 from sqlalchemy.sql import text
 from db import db
 from flask import session
-import json
 
 def create_adventures(user_id):
     sql = text("SELECT * FROM preferences WHERE user_id = :user_id")

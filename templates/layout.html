@@ -8,5 +8,13 @@
 </head>
 <body>
     <h1>Aventura</h1>
+    {% if session.user_id %}
+    <a href="/home" class="nav-button">Home</a>
+    <a href="/get_favorites" class="nav-button">Favorites</a>
+    <a href="/logout" class="nav-button">Log out</a><br><br>
+    {% else %}
+    <a href="/login" class="nav-button">Log in</a>
+    <a href="/register" class="nav-button">Register</a>
+    {% endif %}
 </body>
 {% block content %}{% endblock %}

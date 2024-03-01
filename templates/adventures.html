@@ -8,6 +8,7 @@
     {% endfor %}
 
     {% for adventure in adventures %}
+    <hr>
         <h3>{{ adventure["title"] }}</h3>
         <p>{{ adventure["description"] }}</p>
         {% include "reviews.html" %}
@@ -16,6 +17,7 @@
             <input type="submit" value="Add to favorites">
 
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <br><br>
         </form>
     {% endfor %}
 {% else %}

@@ -35,3 +35,14 @@ textarea.comment {
     background-color: #f0f0f0;
     color: #333;
 }
+
+.nav-button {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    color: #000000;
+    text-decoration: none;
+    background-color: #c4c4c4;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+}

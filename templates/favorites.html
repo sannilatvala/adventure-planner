@@ -9,6 +9,7 @@
 
 {% if favorite_adventures %}
     {% for adventure in favorite_adventures %}
+    <hr>
         <h3>{{ adventure["title"] }}</h3>
         <p>{{ adventure["description"] }}</p>
         {% include "reviews.html" %}
@@ -17,13 +18,13 @@
             <button type="submit">Delete from favorites</button>
 
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <br><br>
         </form>
     {% endfor %}
 {% else %}
     <p>No favorite adventures found.</p>
 {% endif %}
 <br>
-<a href="/home">Home</a><br>
 
 <script src="./static/scripts/confirmationMessage.js"></script>
 <script src="./static/scripts/hideFlashMessage.js"></script>

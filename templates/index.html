@@ -5,12 +5,8 @@
 
 {% if session.user_id %}
 You are logged in as <b>{{ session.user_name }}</b><br>
-<a href="/home">Home</a><br>
-<a href="/logout">Log out</a>
 {% else %}
 You are not logged in<br>
-<a href="/login">Login</a><br>
-<a href="/register">Register</a>
 {% endif %}
 
 {% endblock %}

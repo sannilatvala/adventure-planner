@@ -106,7 +106,7 @@ def add_review():
 
     reviews.add_review(user_id, adventure_id, stars, comment)
 
-    return redirect("/home")
+    return redirect(request.referrer or "/home")
 
 @app.route("/get_favorites", methods=["get"])
 def get_favorites():
